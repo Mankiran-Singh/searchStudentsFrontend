@@ -1,0 +1,54 @@
+<div class="search-container">
+  <!-- Search Input -->
+  <mat-form-field appearance="fill" class="search-input">
+    <mat-label>Search Students</mat-label>
+    <input
+      matInput
+      [matAutocomplete]="auto"
+      [value]="searchQuery"
+      (input)="onSearch($event)"
+      placeholder="Type at least 3 characters..."
+    />
+  </mat-form-field>
+
+  <!-- Autocomplete dropdown -->
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onSelectStudent($event)"
+  >
+    <ng-container *ngIf="filteredStudents?.length; else noData">
+      <mat-option *ngFor="let student of filteredStudents" [value]="student">
+        {{ student.name }} (Roll No: {{ student.rollNumber }})
+      </mat-option>
+    </ng-container>
+    <ng-template #noData>
+      <mat-option disabled>
+        No data found
+      </mat-option>
+    </ng-template>
+  </mat-autocomplete>
+</div>
+
+<!-- Mat Table for Selected Student Details -->
+<div class="student-details" *ngIf="selectedStudent">
+  <mat-label>Selected Student Details</mat-label>
+  <mat-table [dataSource]="[selectedStudent]" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="class">
+      <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.class }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rollNumber">
+      <mat-header-cell *matHeaderCellDef>Roll Number</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.rollNumber }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

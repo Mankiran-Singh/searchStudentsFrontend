@@ -1,0 +1,44 @@
+.search-container {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  width: 300px;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-autocomplete {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+mat-table {
+  width: 100%;
+}
+
+mat-header-row,
+mat-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-cell, mat-header-cell {
+  padding: 10px;
+  text-align: left;
+}
+
+mat-header-cell {
+  font-weight: bold;
+}
+
+mat-label{
+  font-size: large;
+}
+.student-details{
+  text-align: center;
+  margin-top :100px;
+}
